@@ -125,11 +125,20 @@ function createTodoElem(todo) {
     let todoElem = document.createElement("div")
     todoElem.className = 'todo'
     let title = document.createElement("p");
-    title.innerText = todo.title;
+    title.innerText = "Task: " + todo.title;
     let date = document.createElement("p");
-    date.innerText = todo.date.toString();
+    date.innerText = "Date: " + todo.date.toString();
     todoElem.appendChild(title);
     todoElem.appendChild(date);
+    let viewBtn = document.createElement("button")
+    let editBtn = document.createElement("button")
+    let cancelBtn = document.createElement("button")
+    viewBtn.innerText = "View"
+    editBtn.innerText = "Edit"
+    cancelBtn.innerText = "Delete"
+    todoElem.appendChild(viewBtn);
+    todoElem.appendChild(editBtn);
+    todoElem.appendChild(cancelBtn);
     return todoElem;
 }
 
