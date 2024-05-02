@@ -9,6 +9,12 @@
     z-index: 1000;  /* Make sure it's on top of other content */
 }
 
+#editTodoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 #todoForm {
   display: flex;
   flex-direction: column;
