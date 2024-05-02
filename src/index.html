@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="project-dialog" style="display: none;">
+        <form id="projectForm">
+          <h1>Create Project:</h1>
+          <label for="projectName">Project Name:</label>
+          <input type="text" id="projectName" name="projectName" required>
+          <button type="submit">Submit</button>
+          <button type="button" id="project-cancel-btn">Cancel</button>
+        </form>
+    </div>
+    <div id="todo-dialog" style="display: none;">
+        <form id="todoForm">
+          <h1>Create Todo:</h1>
+          <label for="todoTitle">Title:</label>
+          <input type="text" id="todoTitle" name="todoTitle" required>
+          <label for="todoDescription">Description:</label>
+          <textarea id="todoDescription" name="todoDescription" cols="40" rows="5"></textarea>
+          <label for="status">Status:</label>
+          <select id="status">
+            <option value = "Unassigned" selected>Unassigned</option>
+            <option value = "In Progress">In Progress</option>
+            <option value = "Completed">Completed</option>
+          </select>
+          <label for="priority">Priority:</label>
+          <select id="priority">
+            <option value = "Low" selected>Low</option>
+            <option value = "Medium">Medium</option>
+            <option value = "High">High</option>
+          </select>
+          <label for="todo-project">Project:</label>
+          <select id="todo-project">
+            <option value = "Unassigned" selected>Unassigned</option>
+          </select>
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+          <button type="submit">Submit</button>
+          <button type="button" id="todo-cancel-btn">Cancel</button>
+        </form>
+    </div>
+    <div id="project-section">
+        <button id="project-btn">Add Project</button>
+        <div id="project-list"></div>
+    </div>
+    <div id="todo-section">
+        <button id="todo-btn">Add Todo</button>
+        <div id="todo-box"></div>
+    </div>
+</body>
+</html>

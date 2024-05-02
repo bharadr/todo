@@ -1,0 +1,90 @@
+#project-dialog, #todo-dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: white;
+    z-index: 1000;  /* Make sure it's on top of other content */
+}
+
+#todoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+body {
+  display: flex;
+  margin: 0px;
+}
+
+#project-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #ccc;
+  width: 20vw;
+  height: 100vh;
+  gap: 20px;
+}
+
+#project-list button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px;
+  font-weight: 600;
+  border: none;
+  background-color: #ccc;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 4px 4px #999; /* Gray shadow at the bottom */
+}
+
+#project-section button img {
+  width: 30px;
+  height: 30px;
+}
+
+#project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#todo-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.todo {
+  border: 2px solid green;
+  background-color: azure;
+  padding: 10px;
+  width: 20%;
+}
+
+.todo p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.project-entry {
+  display: flex;
+  justify-content: space-between;
+}
+
+#todo-section {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  height: 100vh;
+  background-color: antiquewhite;
+}
+
+#todo-section button, #project-section button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 4px 4px #999; /* Gray shadow at the bottom */
+}
