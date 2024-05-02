@@ -19,6 +19,7 @@ todoCancelBtn.addEventListener('click', function(){
     closeDialog("todo-dialog");
 })
 
+
 document.getElementById('todoForm').addEventListener('submit', function(event) {
     event.preventDefault();  // Prevent the form from submitting normally
     let project = findProjectByName(this.elements['todo-project'].value)
@@ -30,7 +31,6 @@ document.getElementById('todoForm').addEventListener('submit', function(event) {
         project,
     )
     project.taskList.push(todo);
-    console.log(project);
     closeDialog("todo-dialog");
     displayTodos(project);
     this.reset();
@@ -82,16 +82,13 @@ function deleteProject(index) {
 
 function enterProject(index) {
     return function() {
-        console.log("HEY");
         let project = PROJECT_LIST[index];
-        console.log(project);
         displayTodos(project);
     };
 }
 
 
 function renderProjectBox(index) {
-
     let projectBox = document.createElement("div")
     projectBox.className = "project-entry"
     let projectButton = document.createElement("button");
@@ -120,8 +117,38 @@ function createOptionElem(title) {
     return option;
 }
 
+function createFullTodoElem(todo) {
+    document.getElementById("fullTodo").innerHTML = '';
+    let todoElem = document.createElement("div")
+    let title = document.createElement("p");
+    title.innerText = "Task: " + todo.title;
+    let date = document.createElement("p");
+    date.innerText = "Date: " + todo.date.toString();
+    todoElem.appendChild(title);
+    todoElem.appendChild(date);
+    let priority = document.createElement("p");
+    priority.innerText = "Priority: " + todo.priority;
+    let status = document.createElement("p");
+    status.innerText = "Status: " + todo.status;
+    let description = document.createElement("p");
+    description.innerText = "Description: " + todo.description;
+    let project = document.createElement("p");
+    project.innerText = "Project: " + todo.project.title;
+    let cancelBtn = document.createElement("button")
+    cancelBtn.innerText = "Exit"
+    todoElem.appendChild(priority);
+    todoElem.appendChild(status);
+    todoElem.appendChild(description);
+    todoElem.appendChild(project);
+    todoElem.appendChild(cancelBtn);
+    cancelBtn.addEventListener("click", function() {
+        closeDialog("fullTodo");
+    })
+    document.getElementById("fullTodo").appendChild(todoElem);
+}
 
-function createTodoElem(todo) {
+function createTodoElem(project, index) {
+    let todo = project.taskList[index];
     let todoElem = document.createElement("div")
     todoElem.className = 'todo'
     let title = document.createElement("p");
@@ -136,6 +163,14 @@ function createTodoElem(todo) {
     viewBtn.innerText = "View"
     editBtn.innerText = "Edit"
     cancelBtn.innerText = "Delete"
+    viewBtn.addEventListener("click", function() {
+        createFullTodoElem(todo);
+        showDialog("fullTodo");
+    })
+    cancelBtn.addEventListener("click", function() {
+        project.taskList.splice(index, 1);
+        displayTodos(project);
+    })
     todoElem.appendChild(viewBtn);
     todoElem.appendChild(editBtn);
     todoElem.appendChild(cancelBtn);
@@ -175,9 +210,7 @@ function displayTodos(project) {
     let boxElem = document.getElementById("todo-box");
     boxElem.innerHTML = '';
     for (let i = 0; i < project.taskList.length; i++) {
-        console.log("HEYA");
-        let todo = project.taskList[i];
-        let elem = createTodoElem(todo);
+        let elem = createTodoElem(project, i);
         boxElem.appendChild(elem);
     }
 }

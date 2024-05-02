@@ -1,4 +1,4 @@
-#project-dialog, #todo-dialog {
+#project-dialog, #todo-dialog, #fullTodo, #editTodo {
     position: fixed;
     left: 50%;
     top: 50%;
