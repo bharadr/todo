@@ -1,4 +1,6 @@
-import {showDialog, closeDialog} from './utils';
+import {showDialog, closeDialog, getDataLocally, storeDataLocally} from './utils';
+import {defaultProject} from './project';
+
 
 function displayTodos(project) {
     let boxElem = document.getElementById("todo-box");
@@ -7,6 +9,18 @@ function displayTodos(project) {
         let elem = createTodoElem(project, i);
         boxElem.appendChild(elem);
     }
+}
+
+
+function modifyDataObject(project) {
+    let projectList = [];
+    getDataLocally(projectList, defaultProject);
+    for (let i = 0; i < projectList.length; i++) {
+        if (projectList[i].title === project.title) {
+            projectList[i] = project;
+        }
+    }
+    storeDataLocally(projectList);
 }
 
 function createEditTodo(todo, project) {
@@ -78,6 +92,7 @@ function createEditTodo(todo, project) {
         todo.priority = form.elements['edit-priority'].value
         todo.status = form.elements['edit-status'].value
         todo.date = form.elements['edit-date'].value
+        modifyDataObject(project);        
         closeDialog("editTodo");
         displayTodos(project);
         form.reset();
@@ -97,8 +112,6 @@ function createEditTodo(todo, project) {
     editForm.appendChild(statusSelect);
     editForm.appendChild(priorityLabel);
     editForm.appendChild(prioritySelect);
-    // editForm.appendChild(projectLabel);
-    // editForm.appendChild(projectSelect);
     editForm.appendChild(dateLabel);
     editForm.appendChild(dateInput);
     editForm.appendChild(submitButton);
@@ -128,7 +141,7 @@ function createFullTodoElem(todo) {
     let description = document.createElement("p");
     description.innerText = "Description: " + todo.description;
     let project = document.createElement("p");
-    project.innerText = "Project: " + todo.project.title;
+    project.innerText = "Project: " + todo.project;
     let cancelBtn = document.createElement("button")
     cancelBtn.innerText = "Exit"
     todoElem.appendChild(priority);
@@ -176,7 +189,7 @@ function createTodoElem(project, index) {
     return todoElem;
 }
 
-function createTodo(title, desc, date, priority, status, project="None") {
+function createTodo(title, desc, date, priority, status, project="Unassigned") {
     return {
         title: title,
         description: desc,

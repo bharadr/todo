@@ -2,7 +2,7 @@ import Trash from './trash.png';
 import {displayTodos} from './todo';
 
 const DEFAULT_PROJECT_NAME = 'Unassigned'
-
+let defaultProject = createProject(DEFAULT_PROJECT_NAME);
 
 function renderProjectBox(list, index) {
     let projectBox = document.createElement("div")
@@ -92,4 +92,5 @@ export {
     DEFAULT_PROJECT_NAME,
     renderProjectOptions,
     renderProjectList,
+    defaultProject,
 };

@@ -1,10 +1,15 @@
 import './styles.css';
-import {createProject, findProjectByName, DEFAULT_PROJECT_NAME, renderProjectOptions, renderProjectList} from './project';
+import {createProject, findProjectByName, defaultProject, renderProjectOptions, renderProjectList} from './project';
 import {createTodo, displayTodos} from './todo';
-import {showDialog, closeDialog} from './utils';
+import {showDialog, closeDialog, getDataLocally, storeDataLocally} from './utils';
 
-let defaultProject = createProject(DEFAULT_PROJECT_NAME);
-let PROJECT_LIST = [defaultProject]
+
+let PROJECT_LIST = []
+
+getDataLocally(PROJECT_LIST, defaultProject);
+storeDataLocally(PROJECT_LIST);
+
+
 
 let todoBtn = document.getElementById('todo-btn');
 todoBtn.addEventListener('click', function(){
@@ -27,9 +32,10 @@ document.getElementById('todoForm').addEventListener('submit', function(event) {
         this.elements['date'].value,
         this.elements['priority'].value,
         this.elements['status'].value,
-        project,
+        project.title,
     )
     project.taskList.push(todo);
+    storeDataLocally(PROJECT_LIST);
     closeDialog("todo-dialog");
     displayTodos(project);
     this.reset();
@@ -53,6 +59,7 @@ document.getElementById('projectForm').addEventListener('submit', function(event
     renderProjectList(PROJECT_LIST);
     renderProjectOptions(PROJECT_LIST);
     closeDialog("project-dialog");
+    storeDataLocally(PROJECT_LIST);
     this.reset();
 });
 
